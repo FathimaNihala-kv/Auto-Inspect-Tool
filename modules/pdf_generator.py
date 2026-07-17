@@ -27,15 +27,6 @@ from config import REPORTS_DIR, UPLOADS_DIR
 def _header_footer(canvas, doc):
     canvas.saveState()
     width, height = letter
-    logo_path = Path(__file__).resolve().parent.parent / "assets" / "logo.png"
-    # Header: logo left, title centered, date right
-    logo_width = 48
-    logo_height = 48
-    if logo_path.exists():
-        try:
-            canvas.drawImage(str(logo_path), 36, height - logo_height - 18, width=logo_width, height=logo_height, preserveAspectRatio=True, mask='auto')
-        except Exception:
-            pass
     canvas.setFont("Helvetica-Bold", 12)
     canvas.setFont("Helvetica", 8)
 
@@ -105,12 +96,6 @@ def create_report_pdf(inspection_id, vehicle, inspection, items, photos):
     story = []
 
     # Cover Page
-    logo_path = Path(__file__).resolve().parent.parent / "assets" / "logo.png"
-    if logo_path.exists():
-        try:
-            story.append(RLImage(str(logo_path), width=100, height=60))
-        except Exception:
-            pass
     story.append(Spacer(1, 12))
     story.append(Paragraph("Inspection Report", h1))
     story.append(Spacer(1, 6))
